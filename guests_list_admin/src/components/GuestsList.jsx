@@ -5,6 +5,20 @@ import "../style/GuestsList.css";
 const GuestsList = () => {
     const [guests, setGuests] = useState([]);
 
+    // Mapping function for translating status
+    const translateStatus = (status) => {
+        switch (status) {
+            case "come":
+                return "מגיע";
+            case "not come":
+                return "לא מגיע";
+            case "not know":
+                return "לא יודע";
+            default:
+                return status;
+        }
+    };
+
     // Fetch the list of guests when the component mounts
     useEffect(() => {
         const fetchGuests = async () => {
@@ -35,7 +49,7 @@ const GuestsList = () => {
                     {guests.map((guest, index) => (
                         <tr key={index}>
                             <td>{guest.how_much}</td>
-                            <td>{guest.status}</td>
+                            <td>{translateStatus(guest.status)}</td> {/* Translating the status here */}
                             <td>{guest.phone}</td>
                             <td>{guest.last_name}</td>
                             <td>{guest.first_name}</td>
